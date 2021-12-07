@@ -40,5 +40,15 @@ namespace ProductReviewManagement
                 Console.WriteLine(list.ProductId + " = " + list.Count);
             }
         }
+
+        public void retrieveProductdAndReview(List<ProductReview> listProductReviews)
+        {
+            var recordData = listProductReviews.Select(x => new { ProductId = x.ProductId, Review = x.Review });
+            Console.WriteLine("\n Product id and review = ");
+            foreach (var list in recordData)
+            {
+                Console.WriteLine(list.ProductId + "----------" + list.Review);
+            }
+        }
     }
 }
