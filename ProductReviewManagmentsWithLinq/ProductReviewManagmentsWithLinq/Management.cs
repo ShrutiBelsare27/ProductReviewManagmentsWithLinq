@@ -67,13 +67,22 @@ namespace ProductReviewManagement
             return dataTable;
         }
 
-        public void RetrieveRecordsWithIsLikeTrue(DataTable table)
+        /*public void RetrieveRecordsWithIsLikeTrue(DataTable table)
         {
             var recordData = from productReview in table.AsEnumerable() where (productReview.Field<bool>("isLike") == true) select productReview;
             Console.WriteLine("Records with is like true = ");
             foreach (var lists in recordData)
             {
                 Console.WriteLine("Product id = " + lists.Field<int>("ProductId") + "User id = " + lists.Field<int>("UserId") + "Rating is = " + lists.Field<double>("Rating") + " Review is = " + lists.Field<string>("Review") + " isLike = " + lists.Field<bool>("isLike"));
+            }
+        }*/
+
+        public void findAvrageRating(List<ProductReview> listProductReviews)
+        {
+            var recordData = listProductReviews.GroupBy(x => x.ProductId).Select(x => new { ProductId = x.Key, Average = x.Average(y => y.Rating) });
+            foreach (var list in recordData)
+            {
+                Console.WriteLine(list.ProductId + "----------" + list.Average);
             }
         }
     }
